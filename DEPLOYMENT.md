@@ -15,9 +15,9 @@ The included `vercel.json` rewrites all routes to `index.html` so React Router w
 
 ## Backend: Render
 
-The current repository does not yet contain tracked backend source files under `server/`, so Render deployment is not ready from Git alone yet.
+The repository now includes a backend scaffold under `server/` for Express + MySQL.
 
-When your backend files are committed, create a Render Web Service with:
+Create a Render Web Service with:
 
 - Root Directory: `server`
 - Build Command: `npm install`
@@ -34,6 +34,7 @@ Recommended environment variables on Render:
 - `DB_NAME`
 - `JWT_SECRET`
 - `CORS_ORIGIN`
+- `DB_SSL=true`
 
 Do not upload your local `.env` file. Add those values in the Render dashboard instead.
 
@@ -50,10 +51,11 @@ Typical values you will receive:
 - password
 - SSL requirement
 
-If your backend uses `mysql2`, make sure it supports the SSL settings required by your Aiven instance.
+This backend scaffold already uses `mysql2` with optional SSL via `DB_SSL=true`.
 
 ## Current Recommendation
 
-Deploy the frontend now on Vercel.
-
-After that, commit the backend source files inside `server/` and then deploy that folder to Render with Aiven MySQL credentials.
+1. Deploy the frontend on Vercel.
+2. Create a MySQL instance on Aiven or another managed MySQL provider.
+3. Import [schema.sql](c:/Users/Dharanidar%20Reddy/OneDrive/Desktop/PRJ%20DONATION/server/database/schema.sql) into that database.
+4. Deploy the `server/` folder on Render with the database credentials added as environment variables.
